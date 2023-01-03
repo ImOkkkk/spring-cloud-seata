@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        server-addr: 127.0.0.1:8848 # nacos 服务端地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes: # 网关路由配置
+        - id: user # 路由ID，自定义但要保证唯一
+          uri: lb://user # 路由的目标地址 lb表示负载均衡，后面跟服务名称
+          predicates: # 路由断言，其实就是判断请求是否符合路由规则
+            - Path=/user/** # 表示按照路径匹配，只要以/user/开头就符合要求
+server:
+  port: 8083
