@@ -1,6 +1,5 @@
-package com.imokkkk.order.pojo.entity;
+package com.imokkkk.storage.entity;
 
-import java.math.BigDecimal;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,19 +9,17 @@ import lombok.experimental.Accessors;
 
 /**
  * @author ImOkkkk
- * @date 2023/1/3 14:13
+ * @date 2023/1/9 9:48
  * @since 1.0
  */
 @Data
 @Accessors(chain = true)
-@Table(name = "`order`")
-public class Order {
-
+@Table(name = "stock")
+public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userId;
     private String commodityCode;
-    private Integer count;
-    private BigDecimal money;
+    private Long count;
+
 }

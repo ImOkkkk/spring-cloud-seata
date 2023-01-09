@@ -1,4 +1,4 @@
-package com.imokkkk.user.client;
+package com.imokkkk.user.api;
 
 import com.imokkkk.user.pojo.entity.User;
 import org.springframework.web.bind.annotation.GetMapping;

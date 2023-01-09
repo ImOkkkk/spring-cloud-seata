@@ -23,4 +23,34 @@ public class OrderController {
     public UserOrderVO userOrderByUserId(@RequestParam("userId") String userId) {
         return orderService.userOrderByUserId(userId);
     }
+
+    /**
+     * 下单：插入订单表、扣减库存，模拟提交成功
+     *
+     * @return
+     */
+    @RequestMapping("/placeOrder/commit")
+    public Boolean placeOrderCommit() {
+
+        orderService.purchase("1", "product-1", 1);
+        return true;
+    }
+
+    /**
+     * 下单：插入订单表、扣减库存，模拟回滚
+     *
+     * @return
+     */
+    @RequestMapping("/placeOrder/rollback")
+    public Boolean placeOrderRollback() {
+        // product-2 扣库存时模拟了一个业务异常,
+        orderService.purchase("1", "product-2", 1);
+        return true;
+    }
+
+    @RequestMapping("/placeOrder")
+    public Boolean placeOrder(String userId, String commodityCode, Integer count) {
+        orderService.purchase(userId, commodityCode, count);
+        return true;
+    }
 }

@@ -15,4 +15,12 @@ public interface OrderService {
 
     List<Order> listByUserId(String userId);
 
+    /**
+     * 采购
+     * @param userId
+     * @param commodityCode
+     * @param orderCount
+     */
+    void purchase(String userId, String commodityCode, int orderCount);
+
 }

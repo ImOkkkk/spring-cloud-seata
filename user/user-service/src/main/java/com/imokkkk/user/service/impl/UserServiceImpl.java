@@ -3,6 +3,7 @@ package com.imokkkk.user.service.impl;
 import com.imokkkk.user.pojo.entity.User;
 import com.imokkkk.user.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
+@RefreshScope
 public class UserServiceImpl implements UserService {
     @Value("${user.name:OJ}")
     private String name;

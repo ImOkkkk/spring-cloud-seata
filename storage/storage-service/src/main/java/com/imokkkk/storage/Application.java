@@ -1,4 +1,4 @@
-package com.imokkkk.order;
+package com.imokkkk.storage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan(basePackages = "com.imokkkk.order.mapper")
+@MapperScan(basePackages = "com.imokkkk.storage.mapper")
 public class Application {
 
     public static void main(String[] args) {

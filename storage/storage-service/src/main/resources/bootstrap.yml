@@ -1,10 +1,10 @@
 server:
-  port: 8082
+  port: 8084
 spring:
   profiles:
     active: dev
   application:
-    name: order
+    name: storage
   cloud:
     nacos:
       discovery:
@@ -18,9 +18,3 @@ spring:
         file-extension: yml
         shared-configs:
           - application-public.yml
-
-  main:
-    allow-bean-definition-overriding: true
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
