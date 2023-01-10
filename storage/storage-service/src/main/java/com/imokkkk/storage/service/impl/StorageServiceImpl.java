@@ -22,7 +22,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deduct(String commodityCode, int count) {
-        if (commodityCode.equals("product-2")) {
+        if ("product-2".equals(commodityCode)) {
             throw new RuntimeException("异常:模拟业务异常:stock branch exception");
         }
         Example example =

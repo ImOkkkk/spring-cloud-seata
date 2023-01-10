@@ -222,3 +222,6 @@ Temporary Items
 
 target
 
+
+!/dependency-bin/**
+!/skywalking-agent/**

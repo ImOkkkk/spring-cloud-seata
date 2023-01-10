@@ -1,0 +1,27 @@
+feign:
+  httpclient:
+    enabled: true #支持HTTPClient
+    max-connections: 200 #最大连接数
+    max-connections-per-route: 50 #单个路径的最大连接数
+
+seata:
+  service:
+    grouplist:
+      default: 127.0.0.1:8091
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: 7137b2d5-e0fd-4d9f-b963-8a6dceb92b3e
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      data-id: seata-server.yml
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: 7137b2d5-e0fd-4d9f-b963-8a6dceb92b3e
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos

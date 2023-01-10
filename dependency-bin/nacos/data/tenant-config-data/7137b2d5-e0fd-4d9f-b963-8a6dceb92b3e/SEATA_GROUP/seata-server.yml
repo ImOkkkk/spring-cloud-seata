@@ -1,0 +1,4 @@
+service:
+    vgroupMapping:
+        order_tx_group: default
+        storage_tx_group: default

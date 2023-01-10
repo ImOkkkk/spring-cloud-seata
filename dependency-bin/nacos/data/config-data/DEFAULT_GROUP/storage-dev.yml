@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://49.234.39.200:3306/storage?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: xxxxxx
+      validation-query: SELECT 'x'
+seata:
+  tx-service-group: storage_tx_group
+  service:
+    vgroup-mapping:
+      storage_tx_group: default
