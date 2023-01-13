@@ -2,4 +2,7 @@ nacos-server.jar filter=lfs diff=lfs merge=lfs -text
 *.sh linguist-language=Java
 *.cmd linguist-language=Java
 *.bat linguist-language=Java
+*.sh linguist-vendored
+*.cmd linguist-vendored
+*.bat linguist-vendored
 
