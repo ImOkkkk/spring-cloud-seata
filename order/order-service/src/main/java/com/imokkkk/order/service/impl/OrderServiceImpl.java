@@ -8,9 +8,11 @@ import com.imokkkk.order.pojo.entity.Order;
 import com.imokkkk.order.pojo.vo.UserOrderVO;
 import com.imokkkk.order.service.OrderService;
 import com.imokkkk.user.pojo.entity.User;
-import io.seata.spring.annotation.GlobalTransactional;
+import io.seata.rm.tcc.api.BusinessActionContext;
+import io.seata.rm.tcc.api.BusinessActionContextParameter;
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired private UserClient userClient;
@@ -49,25 +52,39 @@ public class OrderServiceImpl implements OrderService {
         return orders;
     }
 
-    /**
-     * 下单：创建订单、减库存，涉及到两个服务
-     *
-     * @param userId
-     * @param commodityCode
-     * @param count
-     */
     @Override
-    @GlobalTransactional
     @Transactional(rollbackFor = Exception.class)
-    public void purchase(String userId, String commodityCode, int count) {
-        BigDecimal orderMoney = new BigDecimal(count).multiply(new BigDecimal(5));
+    public void saveOrder(
+            @BusinessActionContextParameter(paramName = "orderId") String orderId,
+            @BusinessActionContextParameter(paramName = "userId") String userId,
+            @BusinessActionContextParameter(paramName = "commodityCode") String commodityCode,
+            @BusinessActionContextParameter(paramName = "orderCount") int orderCount) {
+        BigDecimal orderMoney = new BigDecimal(orderCount).multiply(new BigDecimal(5));
         Order order =
                 new Order()
                         .setUserId(userId)
                         .setCommodityCode(commodityCode)
-                        .setCount(count)
+                        .setCount(orderCount)
                         .setMoney(orderMoney);
-        orderMapper.insert(order);
-        storageClient.deduct(commodityCode, count);
+        int saveOrderRecord = orderMapper.insert(order);
+        log.info("保存订单{}", saveOrderRecord > 0 ? "成功" : "失败");
+    }
+
+    @Override
+    public boolean commit(BusinessActionContext actionContext) {
+        String orderId = actionContext.getActionContext("orderId").toString();
+        // 更新订单状态为支付成功
+        Integer updateOrderRecord = orderMapper.updateOrderStatus(orderId, "SUCCESS");
+        log.info("更新订单id:{} {}", orderId, updateOrderRecord > 0 ? "成功" : "失败");
+        return true;
+    }
+
+    @Override
+    public boolean rollback(BusinessActionContext actionContext) {
+        String orderId = actionContext.getActionContext("orderId").toString();
+        // 更新订单状态为支付失败
+        Integer updateOrderRecord = orderMapper.updateOrderStatus(orderId, "FAIL");
+        log.info("更新订单id:{} {}", orderId, updateOrderRecord > 0 ? "成功" : "失败");
+        return true;
     }
 }
