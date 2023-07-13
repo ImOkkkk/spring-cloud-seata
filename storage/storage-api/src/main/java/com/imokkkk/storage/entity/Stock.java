@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@Table(name = "stock")
+@Table(name = "storage_tbl")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
