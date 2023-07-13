@@ -5,12 +5,20 @@ spring:
     active: dev
   application:
     name: storage
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/storage?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password:
+      validation-query: SELECT 'x'
   cloud:
     nacos:
       discovery:
         username: nacos
         password: nacos
         server-addr: 127.0.0.1:8848 # nacos 服务端地址
+        enabled: false
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         username: ${spring.cloud.nacos.discovery.username}
@@ -18,3 +26,11 @@ spring:
         file-extension: yml
         shared-configs:
           - application-public.yml
+        enabled: false
+seata:
+  enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/

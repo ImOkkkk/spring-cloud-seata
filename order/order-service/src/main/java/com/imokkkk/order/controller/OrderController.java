@@ -1,11 +1,9 @@
 package com.imokkkk.order.controller;
 
-import com.imokkkk.order.pojo.vo.UserOrderVO;
 import com.imokkkk.order.service.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,7 +23,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping("/placeOrder/commit")
+    @GetMapping("/placeOrder/commit")
     public Boolean placeOrderCommit() {
 
         businessService.createOrder("product-1", 1);
@@ -37,7 +35,7 @@ public class OrderController {
      *
      * @return
      */
-    @RequestMapping("/placeOrder/rollback")
+    @GetMapping("/placeOrder/rollback")
     public Boolean placeOrderRollback() {
         // product-2 扣库存时模拟了一个业务异常,
         businessService.createOrder("product-2", 1);

@@ -15,6 +15,7 @@
     <module>user</module>
     <module>order</module>
     <module>storage</module>
+    <module>eureka-server</module>
   </modules>
 
   <properties>

@@ -18,22 +18,23 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for stock
+-- Table structure for storage_tbl
 -- ----------------------------
-DROP TABLE IF EXISTS `stock`;
-CREATE TABLE `stock`  (
+DROP TABLE IF EXISTS `storage_tbl`;
+CREATE TABLE `storage_tbl`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commodity_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `count` int(11) NULL DEFAULT 0,
+  `freeze_count` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `commodity_code`(`commodity_code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of stock
+-- Records of storage_tbl
 -- ----------------------------
-INSERT INTO `stock` VALUES (1, 'product-1', 10);
-INSERT INTO `stock` VALUES (2, 'product-2', 10);
+INSERT INTO `storage_tbl` VALUES (1, 'product-1', 10, 0);
+INSERT INTO `storage_tbl` VALUES (2, 'product-2', 10, 0);
 
 -- ----------------------------
 -- Table structure for undo_log
