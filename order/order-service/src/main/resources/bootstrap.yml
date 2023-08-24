@@ -41,3 +41,12 @@ eureka:
 
 seata:
   enabled: false
+
+# 启用Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    metrics:
+      enabled: true

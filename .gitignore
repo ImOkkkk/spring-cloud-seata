@@ -225,3 +225,10 @@ target
 
 !/dependency-bin/**
 !/skywalking-agent/**
+/dependency-bin/nacos/data/protocol/raft/naming_instance_metadata/log/
+/dependency-bin/nacos/logs/
+/dependency-bin/nacos/data/protocol/raft/naming_persistent_service_v2/log/
+/dependency-bin/nacos/data/protocol/raft/naming_service_metadata/log/
+/dependency-bin/nacos/bin/logs/
+/dependency-bin/seata/logs/
+/dependency-bin/skywalking/logs/

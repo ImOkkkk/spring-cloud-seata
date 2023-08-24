@@ -20,3 +20,5 @@ spring:
         file-extension: yml
         shared-configs:
           - application-public.yml
+user:
+  name: OJ
