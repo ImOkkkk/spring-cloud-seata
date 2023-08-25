@@ -9,17 +9,17 @@
 
 ## 技术选型
 
-| 类型           | 组件                 |
-| -------------- | -------------------- |
-| 服务注册与发现 | Nacos                |
-| 服务熔断限流   | Sentinel             |
-| 服务间通信调用 | Open Feign           |
-| 配置中心       | Nacos                |
-| 服务网关       | Spring Cloud Gateway |
-| 分布式事务     | Seata                |
-| 消息队列       | RocketMQ             |
-| 调用链路监控*  | skywalking           |
-| 监控*          | Prometheus + Grafana |
+| 类型           | 组件                                                         |
+| -------------- | ------------------------------------------------------------ |
+| 服务注册与发现 | Nacos                                                        |
+| 服务熔断限流   | Sentinel(**[resilience4j](https://github.com/resilience4j/resilience4j)**) |
+| 服务间通信调用 | Open Feign                                                   |
+| 配置中心       | Nacos                                                        |
+| 服务网关       | Spring Cloud Gateway                                         |
+| 分布式事务     | Seata                                                        |
+| 消息队列       | RocketMQ                                                     |
+| 调用链路监控*  | skywalking                                                   |
+| 监控*          | Prometheus + Grafana(**[micrometer](https://github.com/micrometer-metrics/micrometer)**) |
 
 ## 主要组件
 
