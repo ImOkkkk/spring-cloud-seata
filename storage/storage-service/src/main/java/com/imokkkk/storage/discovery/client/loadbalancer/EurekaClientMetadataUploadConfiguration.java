@@ -44,6 +44,7 @@ public class EurekaClientMetadataUploadConfiguration {
 
     @Scheduled(fixedRate = 5000L, initialDelay = 10L)
     public void upload() {
+        //http://localhost:8080/eureka/apps/STORAGE
         InstanceInfo instanceInfo = applicationInfoManager.getInfo();
         Map<String, String> metadata = instanceInfo.getMetadata();
         metadata.put("timestamp", String.valueOf(System.currentTimeMillis()));

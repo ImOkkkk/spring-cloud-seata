@@ -2,6 +2,7 @@ package com.imokkkk.order.service.impl;
 
 import cn.hutool.core.lang.UUID;
 import com.imokkkk.order.client.StorageClient;
+import com.imokkkk.order.interceptor.LoggingInterceptor;
 import com.imokkkk.order.service.BusinessService;
 import com.imokkkk.order.service.OrderService;
 import io.seata.core.context.RootContext;
@@ -23,6 +24,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     @GlobalTransactional(name = "createOrder", rollbackFor = Exception.class)
+    @LoggingInterceptor.Log
     public void createOrder(String commodityCode, int orderCount) {
         log.info("=============用户下单=================");
         log.info("当前 XID: {}", RootContext.getXID());
