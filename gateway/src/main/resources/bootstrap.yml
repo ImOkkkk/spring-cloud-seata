@@ -2,20 +2,46 @@ server:
   port: 8083
 
 spring:
-  profiles:
-    active: dev
-  application:
-    name: gateway
   cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          filter-order:
+      routes:
+        - filters:
+            - RewritePath=/order/(?<segment>.*), /order/${segment}
+            - name: HttpRequestCounter
+          id: order
+          predicates:
+            - Path=/order/**
+          uri: lb://order
     nacos:
       discovery:
+        enabled: false
         username: nacos
         password: nacos
         server-addr: 127.0.0.1:8848 # nacos 服务端地址
       config:
+        enabled: false
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
         file-extension: yml
         shared-configs:
           - application-public.yml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+# 启用Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    metrics:
+      enabled: true
+
+
+
